@@ -21,10 +21,3 @@ const Home = () => {
 export default Home;
 
 
-const getProduct = async () => {
-  const productData: ProductData[] = await fetchProduct();
-  if (!productData) {
-    throw new Error("Failed to fetch data");
-  }
-  return productData;
-}
