@@ -1,5 +1,5 @@
 export const fetchProduct = async () => {
-  const API_URL = process.env.NEXT_PUBLIC_BASE_URL || "";
+  const API_URL = process.env.NEXT_PUBLIC_BASE_URL + "/api/products" || "";
   console.log(API_URL);
   const res = await fetch(API_URL, {
     method: 'GET',
