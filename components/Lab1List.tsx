@@ -25,7 +25,7 @@ function Lab1List({ productData, searchTerm }: Props) {
       <div className="bg-white py-12 sm:py-6">
         <div className="mx-auto px-6 lg:px-8">
           <div className="mx-auto lg:mx-0">
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <h2 className="text-xl mr-4 font-bold tracking-tight text-gray-900 sm:text-4xl">Ecommerce website</h2>
               <img className="h-18 w-32 ml-auto" src="https://1000logos.net/wp-content/uploads/2016/10/Amazon-Logo.png" alt="" />
             </div>
@@ -61,7 +61,7 @@ function Lab1List({ productData, searchTerm }: Props) {
           </div>
           <div className="font-medium">
           {
-          searchTerm ? (productData.length > 0 ? productData.length + " kết quả cho từ khóa '" + searchTerm + "'" : "Không có kết quả") : "Danh sách các sản phẩm"
+          searchTerm ? (productData.length > 0 ? productData.length + " kết quả cho từ khóa '" + searchTerm + "'" : "Không có kết quả") : "Danh sách các sản phẩm ["+ productData.length +"]"
           }
           </div>
           <div className="mx-auto mt-4 grid max-w-2xl grid-cols-1 gap-x-4 gap-y-4 border-t border-orange-600 pt-2 sm:mt-8 sm:pt-8 lg:mx-0 lg:max-w-none md:grid-cols-3 lg:grid-cols-5">

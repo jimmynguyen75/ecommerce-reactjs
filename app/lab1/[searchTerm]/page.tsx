@@ -7,13 +7,11 @@ type Props = {
         searchTerm: string;
     }
 }
-
 const search = async(searchTerm: string) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/search?q=${searchTerm}`)
     const data: ProductData[] = await res.json();
     return data;
 }
-
 async function page({params: {searchTerm}}: Props) {
     const searchResults: ProductData[] = await search(searchTerm);
   return (
@@ -22,7 +20,6 @@ async function page({params: {searchTerm}}: Props) {
       <Lab1List productData={searchResults} searchTerm={searchTerm}/>
     </Suspense>
   </section>
-    
   )
 }
 
