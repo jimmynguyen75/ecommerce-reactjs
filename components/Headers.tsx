@@ -23,7 +23,7 @@ export default function Header() {
         className="flex flex-row items-center text-gray-500 cursor-pointer"
       >
         <SocialIcon url="https://email.com" href="#contact" fgColor="gray" bgColor="transparent" />
-        <p className="uppercase hidden md:inline-flex text-sm text-gray-500">Get in touch</p>
+        <p className="uppercase hidden md:inline-flex text-sm text-gray-500">Get in touchhhhhhhhhhhhh</p>
       </motion.div>
     </header>
   );
