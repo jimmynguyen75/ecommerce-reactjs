@@ -1,7 +1,8 @@
 import Lab1List from "@/components/Lab1List";
+import Loading from "./loading";
 import { ProductData } from "@/typings";
-import { fetchProduct } from "@/utils/fetchProduct";
 import { Suspense } from "react";
+import { fetchProduct } from "@/utils/fetchProduct";
 
 const getProduct = async () => {
   const productData: ProductData[] = await fetchProduct();
@@ -13,7 +14,7 @@ const getProduct = async () => {
 export default async function Home() {
   const productData: ProductData[] = await getProduct();
   return (
-    <Suspense fallback={<p>Loading feed...</p>}>
+    <Suspense fallback={<Loading/>}>
       <Lab1List productData={productData} />
     </Suspense>
   );

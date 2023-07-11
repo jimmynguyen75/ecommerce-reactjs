@@ -1,6 +1,8 @@
-import Lab1List from '@/components/Lab1List';
-import { ProductData } from '@/typings';
 import React, { Suspense } from 'react'
+
+import Lab1List from '@/components/Lab1List';
+import Loading from './loading';
+import { ProductData } from '@/typings';
 
 type Props = {
     params: {
@@ -16,7 +18,7 @@ async function page({params: {searchTerm}}: Props) {
     const searchResults: ProductData[] = await search(searchTerm);
   return (
     <section>
-    <Suspense fallback={<p>Loading feed...</p>}>
+    <Suspense fallback={<Loading/>}>
       <Lab1List productData={searchResults} searchTerm={searchTerm}/>
     </Suspense>
   </section>

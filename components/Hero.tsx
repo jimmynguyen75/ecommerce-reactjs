@@ -33,9 +33,12 @@ export default function Hero() {
           <a href="#lab2">
             <button className="heroButton">Lab 2</button>
           </a>
-          <a href="#lab3">
+          {/* <a href="#lab3">
             <button className="heroButton">Lab 3</button>
-          </a>
+          </a> */}
+          <Link href="/lab3">
+          <button className="heroButton">Lab 3</button>
+            </Link>
           <a href="#lab4">
             <button className="heroButton">Lab 4</button>
           </a>
