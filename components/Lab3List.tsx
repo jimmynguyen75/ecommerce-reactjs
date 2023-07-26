@@ -1,25 +1,46 @@
 "use client";
 
+import { Clothing, ReviewData } from "@/typings";
 import { FormEvent, useState } from "react";
 
 import { useRouter } from "next/navigation";
-import { ReviewData } from "@/typings";
-
+import PredictionModal from "./PredictionModal";
+import { Modal } from "antd";
 type Props = {
-  reviewData: ReviewData[];
+  reviewData: Clothing[];
   searchTerm?: string;
 };
-
+const prediction = async(searchTerm: string) => {
+  const res = await fetch(`http://127.0.0.1:5000/user_id/${searchTerm}`)
+  if (res) {
+    const data = await res.json();
+    return data;
+  }
+}
 function Lab3List({ reviewData, searchTerm }: Props) {
   const [search, setSearch] = useState("");
   const router = useRouter();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [pre, setPre] = useState('');
   const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     router.push(`/lab3/${search}`);
   };
+
+  const showModal = async (data: string) => {
+    const predict = await prediction(data);
+    console.log("pre", predict)
+    setPre(predict.result)
+    setIsModalOpen(true);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
+      <Modal title="Prediction" open={isModalOpen} onCancel={handleCancel}>
+        <p>Predicted frequency for user with User ID {pre}</p>
+      </Modal>
       <div className="bg-white py-8">
         <div className="mx-auto px-6 lg:px-8">
           <div className="mx-auto lg:mx-0">
@@ -65,21 +86,25 @@ function Lab3List({ reviewData, searchTerm }: Props) {
           </div>
           <div className="mx-auto mt-4 grid max-w-2xl grid-cols-1 gap-x-4 gap-y-4 border-t border-orange-600 pt-2 sm:mt-8 sm:pt-8 lg:mx-0 lg:max-w-none md:grid-cols-3 lg:grid-cols-5">
             {reviewData.map((data, i) => (
-              <article key={i} className="flex bg-gray-50 border border-gray-200 rounded-sm p-4 max-w-xl flex-col items-start justify-between">
+              <article
+                key={i}
+                onClick={ ()=> showModal(data.user_id)}
+                className="flex bg-gray-50 border border-gray-200 rounded-sm p-4 max-w-xl flex-col items-start justify-between"
+              >
                 <div className="flex  items-center gap-x-4 text-xs">
                   <time className="text-gray-500">User ID: {data.user_id}</time>
                   <a href="#" className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
-                    Rating: {data.rating}
+                    Category: {data.category}
                   </a>
                 </div>
                 <div className="group relative">
                   <h3 className="mt-1 text-md font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
                     <a href="#">
                       <span className="absolute inset-0"></span>
-                      {data.category}
+                      {data.user_name}
                     </a>
                   </h3>
-                  <p className="mt-3 line-clamp-3 text-sm leading-6 text-gray-600">{data.review_summary}</p>
+                  <p className="mt-3 line-clamp-3 text-sm leading-6 text-gray-600">{data.user_id}</p>
                 </div>
               </article>
             ))}

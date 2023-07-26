@@ -1,22 +1,24 @@
-import { Suspense } from 'react';
+import { Clothing, ReviewData } from "@/typings";
 
+import ClothList from '@/components/ClothList';
 import Lab3List from '@/components/Lab3List';
-import { ReviewData } from '@/typings';
 import Loading from './loading';
+import { Suspense } from 'react';
 
 type Props = {
     params: {
         searchTerm: string;
     }
 }
+
 const search = async(searchTerm: string) => {
-    console.log("searchTerm", searchTerm)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/ratings/${searchTerm}`)
-    const data: ReviewData[] = await res.json();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/clothing/users/${searchTerm}`)
+    const data: Clothing[] = await res.json();
     return data;
 }
+
 async function page({params: {searchTerm}}: Props) {
-    const searchResults: ReviewData[] = await search(searchTerm);
+  const searchResults: Clothing[] = await search(searchTerm);
   return (
     <section>
     <Suspense fallback={<Loading/>}>

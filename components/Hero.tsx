@@ -2,9 +2,10 @@
 
 import { Cursor, useTypewriter } from "react-simple-typewriter";
 
+import BackgroundCircles from "./BackgroundCircles";
 import Link from "next/link";
 import React from "react";
-import BackgroundCircles from "./BackgroundCircles";
+
 export default function Hero() {
    // with require
   const [text, count] = useTypewriter({
@@ -39,9 +40,9 @@ export default function Hero() {
           <Link href="/lab3">
           <button className="heroButton">Lab 3</button>
             </Link>
-          <a href="#lab4">
-            <button className="heroButton">Lab 4</button>
-          </a>
+            <Link href="/lab4">
+          <button className="heroButton">Lab 3</button>
+            </Link>
         </div>
       </div>
     </div>
